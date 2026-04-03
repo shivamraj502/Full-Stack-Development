@@ -1,0 +1,19 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background: #7aaed6;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    background: rgb(213, 132, 132);
+    padding: 10px;
+    border-radius: 10px;
+}
