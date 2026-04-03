@@ -1,0 +1,82 @@
+<!-- Day 19: Local storage basics.
+👉 Task: Store and retrieve notes in local storage. -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes App (Local Storage)</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+        }
+
+        #notes {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>My Notes</h2>
+
+<textarea id="noteInput" placeholder="Write your note..."></textarea><br>
+
+<button onclick="saveNote()">Save Note</button>
+<button onclick="loadNotes()">Show Notes</button>
+
+<div id="notes"></div>
+
+<script>
+
+// Save note to localStorage
+function saveNote() {
+    let note = document.getElementById("noteInput").value;
+
+    if (note === "") {
+        alert("Enter a note");
+        return;
+    }
+
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    notes.push(note);
+
+    localStorage.setItem("notes", JSON.stringify(notes));
+
+    document.getElementById("noteInput").value = "";
+
+    alert("Note saved!");
+}
+
+
+// Load notes from localStorage
+function loadNotes() {
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    let output = "";
+
+    notes.forEach((note, index) => {
+        output += `<p>${index + 1}. ${note}</p>`;
+    });
+
+    document.getElementById("notes").innerHTML = output;
+}
+
+</script>
+
+</body>
+</html>

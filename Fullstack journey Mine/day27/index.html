@@ -1,0 +1,28 @@
+/** Day 27: Mini Project → Quiz App (MCQs with score).*/
+
+<h2 id="question"></h2>
+<button onclick="answer(0)">Option 1</button>
+<button onclick="answer(1)">Option 2</button>
+
+<p id="score"></p>
+
+<script>
+let q = ["2+2=?", "3+3=?"];
+let a = [["3","4"], ["5","6"]];
+let correct = [1,1];
+
+let index = 0, score = 0;
+
+function loadQ() {
+    document.getElementById("question").innerHTML = q[index];
+}
+
+function answer(i) {
+    if (i === correct[index]) score++;
+    index++;
+    if (index < q.length) loadQ();
+    else document.getElementById("score").innerHTML = "Score: " + score;
+}
+
+loadQ();
+</script>

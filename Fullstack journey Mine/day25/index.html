@@ -1,0 +1,10 @@
+/** Day 25: Practice DOM + Events challenges. */
+
+<button id="btn">Click Me</button>
+<p id="text">Hello</p>
+
+<script>
+document.getElementById("btn").addEventListener("click", () => {
+    document.getElementById("text").innerHTML = "Changed!";
+});
+</script>

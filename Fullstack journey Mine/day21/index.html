@@ -1,0 +1,98 @@
+<!-- Day 21: Mini Project → Weather App (using OpenWeather API). -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Weather App</title>
+</head>
+<body>
+
+<h2>Search City Weather</h2>
+
+<input type="text" id="cityInput" placeholder="Enter city name">
+<button onclick="searchWeather()">Search</button>
+
+<div id="result"></div>
+
+<script>
+
+// Your cities array (short example, you can use full list)
+
+// List of cities with coordinates
+let cities = [
+
+    // 🇮🇳 STATES
+    { name: "Amaravati", lat: 16.51, lon: 80.52 },        // Andhra Pradesh
+    { name: "Itanagar", lat: 27.10, lon: 93.62 },         // Arunachal Pradesh
+    { name: "Dispur", lat: 26.14, lon: 91.77 },           // Assam
+    { name: "Patna", lat: 25.59, lon: 85.13 },            // Bihar
+    { name: "Raipur", lat: 21.25, lon: 81.63 },           // Chhattisgarh
+    { name: "Panaji", lat: 15.49, lon: 73.82 },           // Goa
+    { name: "Gandhinagar", lat: 23.22, lon: 72.65 },      // Gujarat
+    { name: "Chandigarh", lat: 30.73, lon: 76.78 },       // Haryana
+    { name: "Shimla", lat: 31.10, lon: 77.17 },           // Himachal Pradesh
+    { name: "Ranchi", lat: 23.34, lon: 85.31 },           // Jharkhand
+    { name: "Bangalore", lat: 12.97, lon: 77.59 },        // Karnataka
+    { name: "Thiruvananthapuram", lat: 8.52, lon: 76.93 },// Kerala
+    { name: "Bhopal", lat: 23.25, lon: 77.41 },           // Madhya Pradesh
+    { name: "Mumbai", lat: 19.07, lon: 72.87 },           // Maharashtra
+    { name: "Imphal", lat: 24.81, lon: 93.94 },           // Manipur
+    { name: "Shillong", lat: 25.57, lon: 91.88 },         // Meghalaya
+    { name: "Aizawl", lat: 23.73, lon: 92.72 },           // Mizoram
+    { name: "Kohima", lat: 25.67, lon: 94.11 },           // Nagaland
+    { name: "Bhubaneswar", lat: 20.29, lon: 85.82 },      // Odisha
+    { name: "Chandigarh", lat: 30.73, lon: 76.78 },       // Punjab
+    { name: "Jaipur", lat: 26.91, lon: 75.79 },           // Rajasthan
+    { name: "Gangtok", lat: 27.33, lon: 88.62 },          // Sikkim
+    { name: "Chennai", lat: 13.08, lon: 80.27 },          // Tamil Nadu
+    { name: "Hyderabad", lat: 17.38, lon: 78.48 },        // Telangana
+    { name: "Agartala", lat: 23.83, lon: 91.28 },         // Tripura
+    { name: "Lucknow", lat: 26.85, lon: 80.95 },          // Uttar Pradesh
+    { name: "Dehradun", lat: 30.31, lon: 78.03 },         // Uttarakhand
+    { name: "Kolkata", lat: 22.57, lon: 88.36 },          // West Bengal
+
+    // 🇮🇳 UNION TERRITORIES
+    { name: "New Delhi", lat: 28.61, lon: 77.21 },        // Delhi (UT)
+    { name: "Srinagar", lat: 34.08, lon: 74.79 },         // J&K (Summer)
+    { name: "Jammu", lat: 32.73, lon: 74.87 },            // J&K (Winter)
+    { name: "Leh", lat: 34.15, lon: 77.57 },              // Ladakh
+    { name: "Puducherry", lat: 11.94, lon: 79.81 },       // Puducherry
+    { name: "Port Blair", lat: 11.67, lon: 92.74 },       // Andaman & Nicobar
+    { name: "Daman", lat: 20.41, lon: 72.83 },            // Daman & Diu
+    { name: "Kavaratti", lat: 10.57, lon: 72.64 },        // Lakshadweep
+    { name: "Chandigarh", lat: 30.73, lon: 76.78 }        // Chandigarh (UT)
+];
+
+// 🔍 SEARCH FUNCTION ONLY
+async function searchWeather() {
+
+    let input = document.getElementById("cityInput").value.toLowerCase();
+
+    let city = cities.find(c => c.name.toLowerCase() === input);
+
+    if (!city) {
+        document.getElementById("result").innerHTML = "❌ City not found";
+        return;
+    }
+
+    let url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&current=temperature_2m,wind_speed_10m`;
+
+    try {
+        let res = await fetch(url);
+        let data = await res.json();
+
+        document.getElementById("result").innerHTML =
+            `City: ${city.name} <br>
+             Temperature: ${data.current.temperature_2m}°C <br>
+             Wind Speed: ${data.current.wind_speed_10m} km/h`;
+
+    } catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+</script>
+
+</body>
+</html>

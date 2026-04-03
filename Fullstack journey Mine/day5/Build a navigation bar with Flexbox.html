@@ -1,0 +1,49 @@
+<!-- Day 5: CSS Flexbox.
+👉 Task: Build a navigation bar with Flexbox. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Build a navigation bar with Flexbox.</title>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: rgb(190, 112, 129);
+        }
+
+        .box {
+            background-color: rgb(174, 92, 119);
+            width: auto;
+            height: 25px;
+            padding: 10px;
+            margin: 0px;
+            border: 1px solid rgb(103, 92, 64);
+            border-radius: 0px;
+            display: flex;
+            gap: 20px;
+            justify-content: space-around;
+        }
+
+        .box a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .box a:hover {
+            text-decoration: underline;
+            color:black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="box">
+        <a href="#">hii</a>
+        <a href="#">hoo</a>
+        <a href="#">hide</a>
+        <a href="#">hire</a>
+    </nav>
+</body>
+</html>
