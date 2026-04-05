@@ -1,5 +1,10 @@
 /**
-
+Day 38 – useEffect
+Topic: Side effects
+Task:
+Print message on component load
+👉 Build:
+Counter + console log on change
  */
 
 // function App(){
