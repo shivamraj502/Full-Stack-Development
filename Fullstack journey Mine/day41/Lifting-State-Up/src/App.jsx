@@ -1,9 +1,7 @@
 /**
 Day 41 – Lifting State Up
-
 Topic: Parent-child communication
 Task:
-
 Share state between components
 👉 Build:
 Input in child → show in parent
