@@ -1,2 +1,0 @@
-/*
-Develop a model form for student that contains his topic chosen for project ,languages used and duration with a model called project*/
