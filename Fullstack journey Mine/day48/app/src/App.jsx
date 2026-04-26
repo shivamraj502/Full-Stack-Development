@@ -49,25 +49,51 @@ Reuse API logic
 // export default App;
 
 
-import { useState } from 'react';
+// import { useState } from 'react';
+
+// function App() {
+//   const initialValue = 0;
+//   const [count, setCount] = useState(initialValue);
+
+//   const increment = () => setCount(count + 1);
+//   const decrement = () => setCount(count - 1);
+//   const reset = () => setCount(initialValue);
+
+//   return (
+//     <div style={{ textAlign: "center", marginTop: "100px" }}>
+//       <h1>Counter App</h1>
+
+//       <h2>{count}</h2>
+
+//       <button onClick={increment}>➕</button>
+//       <button onClick={decrement}>➖</button>
+//       <button onClick={reset}>🔄</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+import useFetch from "./useFetch";
 
 function App() {
-  const initialValue = 0;
-  const [count, setCount] = useState(initialValue);
-
-  const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
-  const reset = () => setCount(initialValue);
+  const { data, loading } = useFetch(
+    "https://jsonplaceholder.typicode.com/users"
+  );
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1>Counter App</h1>
+    <div>
+      <h1>User List</h1>
 
-      <h2>{count}</h2>
-
-      <button onClick={increment}>➕</button>
-      <button onClick={decrement}>➖</button>
-      <button onClick={reset}>🔄</button>
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        data.map(user => (
+          <p key={user.id}>{user.name}</p>
+        ))
+      )}
     </div>
   );
 }
