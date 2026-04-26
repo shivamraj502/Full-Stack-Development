@@ -35,15 +35,41 @@ Reuse API logic
 // export default App;
 
 
+// import { useState } from 'react';
+// function App(initialValue = 0) {
+//   const [count, setCount] = useState(initialValue);
+
+//   const increment = () => setCount(count + 1);
+//   const decrement = () => setCount(count - 1);
+//   const reset = () => setCount(initialValue);
+
+//   return { count, increment, decrement, reset };
+// }
+
+// export default App;
+
+
 import { useState } from 'react';
-function App(initialValue = 0) {
+
+function App() {
+  const initialValue = 0;
   const [count, setCount] = useState(initialValue);
 
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count - 1);
   const reset = () => setCount(initialValue);
 
-  return { count, increment, decrement, reset };
+  return (
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h1>Counter App</h1>
+
+      <h2>{count}</h2>
+
+      <button onClick={increment}>➕</button>
+      <button onClick={decrement}>➖</button>
+      <button onClick={reset}>🔄</button>
+    </div>
+  );
 }
 
 export default App;
