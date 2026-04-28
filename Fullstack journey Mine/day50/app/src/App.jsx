@@ -27,20 +27,41 @@ Optimize component re-render
 // export default App;
 
 
-import { useState, useMemo } from "react";
+// import { useState, useMemo } from "react";
+
+// function App() {
+//   const [num, setNum] = useState(0);
+
+//   const square = useMemo(() => {
+//     console.log("Calculating...");
+//     return num * num;
+//   }, [num]);
+
+//   return (
+//     <div>
+//       <h2>{square}</h2>
+//       <button onClick={() => setNum(num + 1)}>Increase</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+import { useState, useCallback } from "react";
 
 function App() {
-  const [num, setNum] = useState(0);
+  const [count, setCount] = useState(0);
 
-  const square = useMemo(() => {
-    console.log("Calculating...");
-    return num * num;
-  }, [num]);
+  const handleClick = useCallback(() => {
+    console.log("Clicked");
+  }, []);
 
   return (
     <div>
-      <h2>{square}</h2>
-      <button onClick={() => setNum(num + 1)}>Increase</button>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+      <button onClick={handleClick}>Click Me</button>
     </div>
   );
 }
