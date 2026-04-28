@@ -6,20 +6,41 @@ Optimize component re-render
  */
 
 
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
-const Child = React.memo(({ name }) => {
-  console.log("Child Rendered");
-  return <h2>{name}</h2>;
-});
+// const Child = React.memo(({ name }) => {
+//   console.log("Child Rendered");
+//   return <h2>{name}</h2>;
+// });
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   return (
+//     <div>
+//       <Child name="Shivam" />
+//       <button onClick={() => setCount(count + 1)}>Click</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+import { useState, useMemo } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [num, setNum] = useState(0);
+
+  const square = useMemo(() => {
+    console.log("Calculating...");
+    return num * num;
+  }, [num]);
 
   return (
     <div>
-      <Child name="Shivam" />
-      <button onClick={() => setCount(count + 1)}>Click</button>
+      <h2>{square}</h2>
+      <button onClick={() => setNum(num + 1)}>Increase</button>
     </div>
   );
 }
