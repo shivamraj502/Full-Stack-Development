@@ -67,3 +67,12 @@ function App() {
 }
 
 export default App;
+
+
+
+
+// | Hook        | Use               |
+// | ----------- | ----------------- |
+// | React.memo  | prevent re-render |
+// | useMemo     | cache value       |
+// | useCallback | cache function    |
