@@ -4,6 +4,7 @@ function App(){
     {/* <h1>hello dear brother and sister</h1> */}
     <h1 className="text-3xl text-blue-500 bg-blue ">Tailwind Working ✅</h1>
 
+
     </>
   );
 }export default App;
