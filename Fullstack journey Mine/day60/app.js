@@ -1,3 +1,14 @@
+/**
+Day 60 – File System
+
+Topic: fs module
+Task:
+Create, read, update, delete files
+👉 Build:
+Create notes.txt
+Write and read data
+ */
+
 // const fs = require("fs")
 // fs.writeFileSync("filename", "data")
 
