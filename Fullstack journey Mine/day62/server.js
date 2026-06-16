@@ -1,3 +1,13 @@
+/**
+Day 62 – HTTP Module
+
+Topic: Create server without Express
+Task:
+Create basic server
+👉 Build:
+Show “Hello from server” on browser
+ */
+
 const http = require("http");
 
 const server = http.createServer((req, res) => {
