@@ -1,0 +1,12 @@
+/**
+⚡ Week 14 (Days 94–100): MongoDB (NoSQL)
+Day 94 – MongoDB Basics
+
+Topic: NoSQL, collections
+Task:
+Install MongoDB / MongoDB Atlas
+👉 Build:
+Create database
+ */
+
+use studentDB;
