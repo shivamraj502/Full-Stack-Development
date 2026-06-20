@@ -7,80 +7,83 @@ Invalidate token
 
 
 const express = require("express");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
-let refreshTokens = [];
-let blacklistedTokens = [];
+let users = [];
 
-// Login
-app.post("/login", (req, res) => {
-  const user = { email: "shivam@gmail.com" };
-
-  const accessToken = jwt.sign(user, "accessSecret", {
-    expiresIn: "15m"
-  });
-
-  const refreshToken = jwt.sign(user, "refreshSecret", {
-    expiresIn: "7d"
-  });
-
-  refreshTokens.push(refreshToken);
-
-  res.json({
-    accessToken,
-    refreshToken
-  });
-});
-
-// Refresh Token
-app.post("/refresh", (req, res) => {
-  const { refreshToken } = req.body;
-
-  if (!refreshToken) {
-    return res.status(401).json({
-      message: "Refresh token required"
-    });
-  }
-
-  if (!refreshTokens.includes(refreshToken)) {
-    return res.status(403).json({
-      message: "Invalid refresh token"
-    });
-  }
-
-  jwt.verify(refreshToken, "refreshSecret", (err, user) => {
-    if (err) {
-      return res.status(403).json({
-        message: "Invalid refresh token"
-      });
-    }
-
-    const newAccessToken = jwt.sign(
-      { email: user.email },
-      "accessSecret",
-      { expiresIn: "15m" }
-    );
-
-    res.json({
-      accessToken: newAccessToken
-    });
-  });
-});
-
-// Logout
-app.post("/logout", (req, res) => {
+const verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
 
-  blacklistedTokens.push(token);
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
 
-  const { refreshToken } = req.body;
-  refreshTokens = refreshTokens.filter(t => t !== refreshToken);
+  try {
+    const decoded = jwt.verify(token, "mysecretkey");
+    req.user = decoded;
+    next();
+  } catch {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+app.post("/register", async (req, res) => {
+  const { email, password } = req.body;
+
+  const userExists = users.find(u => u.email === email);
+
+  if (userExists) {
+    return res.status(400).json({ message: "User already exists" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  users.push({
+    email,
+    password: hashedPassword
+  });
+
+  res.json({ message: "Registered successfully" });
+});
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = users.find(u => u.email === email);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  const token = jwt.sign(
+    { email: user.email },
+    "mysecretkey",
+    { expiresIn: "1h" }
+  );
 
   res.json({
-    message: "Logged out successfully"
+    message: "Login successful",
+    token
+  });
+});
+
+app.get("/profile", verifyToken, (req, res) => {
+  res.json({
+    message: "Protected route accessed",
+    user: req.user
   });
 });
 
