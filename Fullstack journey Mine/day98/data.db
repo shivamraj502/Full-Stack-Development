@@ -1,0 +1,90 @@
+//
+Day 98 – Aggregation Pipeline
+
+Task:
+Use $match, $group
+👉 Build:
+Count users
+
+
+Like SQL:
+
+GROUP BY
+COUNT()
+SUM()
+AVG()
+
+MongoDB equivalent:
+
+$match
+$group
+
+
+Aggregation Syntax
+db.collection.aggregate([
+   { stage1 },
+   { stage2 }
+])
+
+
+1. $match
+
+Used to filter documents.
+
+Example:
+
+Find only CSE students.
+
+db.users.aggregate([
+  {
+    $match: { branch: "CSE" }
+  }
+])
+
+
+or 
+db.users.aggregate([{$match : {branch : "cse"}}])
+
+
+2. $group
+
+Used to group documents.
+
+Example:
+Count total users.
+
+db.users.aggregate([
+  {
+    $group: {
+      _id: null,
+      totalUsers: { $sum: 1 }
+    }
+  }
+])
+
+
+Group by Branch
+
+Count users branch-wise.
+
+db.users.aggregate([
+  {
+    $group: {
+      _id: "$branch",
+      total: { $sum: 1 }
+    }
+  }
+])
+
+
+MATCH & GROUP
+db.users.aggregate(
+  [
+    {
+     $match : {branch : "CSE"}
+    },
+    {
+      $group: {_id : null, totalUsers: {$sum : 1}}
+    }
+  ]
+)
