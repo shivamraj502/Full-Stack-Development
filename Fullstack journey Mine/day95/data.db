@@ -1,0 +1,46 @@
+/**
+Day 95 – CRUD Operations
+
+Task:
+
+Insert, find, update, delete
+👉 Practice:
+Create users collection
+*/
+
+
+SQL vs MongoDB CRUD
+SQL	    MongoDB
+INSERT	insertOne()
+SELECT	find()
+UPDATE	updateOne()
+DELETE	deleteOne()
+
+Engineering Use Cases
+CRUD is used in every software system:
+User management
+Banking apps
+E-commerce
+Social media
+Student portals
+
+Examples:
+Register user → Insert
+Login → Find
+Edit profile → Update
+Delete account → Delete
+
+                      USING MONGODB SHELL
+db.users.insertOne({
+  name: "shivam",
+  age: 21
+})
+
+db.users.find()
+
+db.users.updateOne(
+  { name: "shivam" },
+  { $set: { age: 22 } }
+)
+
+db.users.deleteOne({ name: "shivam" })
