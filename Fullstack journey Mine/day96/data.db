@@ -1,0 +1,113 @@
+Day 96 – Schema Design
+
+Task:
+Design document structure
+👉 Build:
+Blog schema (title, content, author)
+
+
+Sample document:
+{
+  "title": "MongoDB Basics",
+  "content": "Learning MongoDB",
+  "author": "Shivam",
+  "likes": 10
+}
+
+CREATE Queries
+1. Insert One Blog
+db.blogs.insertOne({
+  title: "MongoDB Basics",
+  content: "Learning MongoDB",
+  author: "Shivam"
+})
+
+2. Insert Multiple Blogs
+db.blogs.insertMany([
+  {
+    title: "MongoDB Basics",
+    content: "Learning MongoDB",
+    author: "Shivam"
+  },
+  {
+    title: "NoSQL",
+    content: "MongoDB is NoSQL",
+    author: "Rahul"
+  }
+])
+READ Queries
+
+3. Show All Blogs
+db.blogs.find()
+
+4. Find One Blog
+db.blogs.findOne({ author: "Shivam" })
+
+5. Find by Title
+db.blogs.find({ title: "MongoDB Basics" })
+
+6. Find by Author
+db.blogs.find({ author: "Rahul" })
+
+7. Find with Likes > 5
+db.blogs.find({ likes: { $gt: 5 } })
+UPDATE Queries
+
+8. Update One Blog
+db.blogs.updateOne(
+  { author: "Shivam" },
+  { $set: { author: "Shivam Raj" } }
+)
+
+9. Update Likes
+db.blogs.updateOne(
+  { title: "MongoDB Basics" },
+  { $set: { likes: 50 } }
+)
+
+10. Add New Field
+db.blogs.updateMany(
+  {},
+  { $set: { category: "Database" } }
+)
+DELETE Queries
+
+11. Delete One Blog
+db.blogs.deleteOne({
+  title: "NoSQL"
+})
+
+12. Delete Multiple Blogs
+db.blogs.deleteMany({
+  author: "Rahul"
+})
+
+SORT Queries
+13. Sort by Likes Ascending
+db.blogs.find().sort({ likes: 1 })
+
+14. Sort by Likes Descending
+db.blogs.find().sort({ likes: -1 })
+
+LIMIT Queries
+15. Show First 2 Blogs
+db.blogs.find().limit(2)
+COUNT Queries
+
+16. Count Blogs
+db.blogs.countDocuments()
+
+SEARCH Queries
+17. Blogs by Category
+db.blogs.find({
+  category: "Database"
+})
+
+18. Find Blogs with Specific Word
+db.blogs.find({
+  title: /Mongo/
+})
+
+DROP Queries
+19. Delete Collection
+db.blogs.drop()
