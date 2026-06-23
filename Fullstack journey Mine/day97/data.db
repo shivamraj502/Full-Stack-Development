@@ -1,0 +1,44 @@
+Day 97 – Indexes
+
+Task:
+Create index
+👉 Understand:
+Faster queries
+
+
+db.users.createIndex({ email: 1 })
+db.users.createIndex({ age: 1 })
+db.users.getIndexes()
+db.users.dropIndex({ email: 1 })
+db.users.createIndex({
+  name: 1,
+  age: -1
+})
+
+
+Engineering Use Cases :>
+
+Indexes are heavily used in:
+
+Login Systems
+Search by email
+
+db.users.find({ email: "shivam@gmail.com" })
+
+E-commerce
+Search products
+db.products.find({ category: "mobile" })
+
+Example:
+
+Amazon India
+
+Social Media
+Search users/posts
+
+Example:
+
+Instagram
+
+Banking Apps
+Fast transaction lookup
