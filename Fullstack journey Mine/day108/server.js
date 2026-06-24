@@ -15,12 +15,14 @@ const connectDB = require("./config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./models/User");
+const taskRoutes = require("./routes/taskRoutes");
 
 const app = express();
 
 app.use(express.json());
 
 connectDB();
+app.use("/tasks", taskRoutes);
 
 app.get("/", (req, res) => {
     res.send("Task Manager Backend Running");
